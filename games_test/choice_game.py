@@ -1,54 +1,44 @@
 import random
 
-MAX_NUMBER = 3
 to_be_chosen = ['rias', 'akeno', 'power']
+
 
 def char_choice():
     while True:
-        character_list = print ("choose from: rias/akeno/power")
+        print("choose from: rias/akeno/power")
+
         user_chosen = input("What is your choice? ").lower()
-        to_be_chosen = ['rias', 'akeno', 'power']
         if user_chosen in to_be_chosen:
-            print("verified")
-            break
+            com_choice = random.choice(to_be_chosen)
+            print(f"{com_choice} was drawn")
+            if user_chosen == com_choice:
+                print(f"you acquired {user_chosen}")
+
+                # card score tab
+
+                rias_card = 0
+                akeno_card = 0
+                power_card = 0
+
+                if user_chosen == "rias" and com_choice == "rias":
+                    rias_card += 1
+                    print(f"your total rias card are {rias_card}")
+                if user_chosen == "akeno" and com_choice == "akeno":
+                    akeno_card += 1
+                    print(f"your total akeno card are {akeno_card}")
+                if user_chosen == "power" and com_choice == "power":
+                    power_card += 1
+                    print(f"your total power card are {power_card}")
+
+                break
+            else:
+                print("Try again!")
+
         else:
             print("Only a single given character should be chosen")
     return user_chosen
 
-def computer_choice():
-    com_choice = random.choice(to_be_chosen)
-    print(com_choice)
-
-def get_amount_to_bet():
-    while True:
-        user_bet = input(f"enter the amount of bet on (1 - {str(MAX_NUMBER)}): ")
-        if user_bet.isdigit():
-            user_bet = int(user_bet)
-            if 1 <= user_bet <= MAX_NUMBER:
-                break
-            else:
-                print("enter a valid number.")
-
-        else:
-            print("please enter a number.")
-    return user_bet
+char_choice()
 
 
 
-def main():
-    collect = char_choice()
-    while True:
-        number = get_amount_to_bet()
-        total_token = 1
-        if total_token < number:
-            print(f"not enough token, total_token = {total_token}")
-        else:
-            break
-
-    print(f"You chose {collect} and betting {number}.")
-
-    print(collect, number)
-
-
-
-main()
